@@ -846,10 +846,12 @@ function clearYearFilter(){ document.getElementById('year-from').value=''; docum
 
 // ===== ROOM FILTERS =====
 function updateRoomFilters(){
-  const rooms=[...new Set(books.map(b=>b.room).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru'));
-  const el=document.getElementById('room-filters');
-  if(!rooms.length){el.innerHTML='';return;}
-  el.innerHTML='<button class="chip room-chip active" onclick="setRoom('all',this)">Все комнаты</button>'+rooms.map(r=>`<button class="chip room-chip" onclick="setRoom('${esc(r)}',this)">${esc(r)}</button>`).join('');
+  const rooms=[...new Set(books.map(b=>b.room).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ru"));
+  const el=document.getElementById("room-filters");
+  if(!rooms.length){el.innerHTML="";return;}
+  let html='<button class="chip room-chip active" onclick="setRoom(\'all\',this)">Все комнаты</button>';
+  rooms.forEach(r=>{ html+='<button class="chip room-chip" onclick="setRoom(\''+esc(r)+'\',this)">'+ esc(r)+'</button>'; });
+  el.innerHTML=html;
 }
 
 // ===== DUPLICATE CHECK =====
